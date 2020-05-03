@@ -33,6 +33,8 @@ const App = () => {
       return setPurchaseAmountIsUnderMinimumAmountError(true)
     }
     const _purchaseAmount = Number(validatedPurchaseAmount)
+    const lottoCount = Math.floor(_purchaseAmount / LOTTO_PRICE)
+    console.log(lottoCount)
   }
   return (
     <div>
