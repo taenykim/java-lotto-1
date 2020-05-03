@@ -16,7 +16,6 @@ const App = () => {
     LOTTO_NUMBERS.push(i + 1)
   }
 
-  const [purchaseAmount, setPurchaseAmount] = useState('')
   const [purchaseAmountIsBlankError, setPurchaseAmountIsBlankError] = useState(false)
   const [purchaseAmountIsNotNumberError, setPurchaseAmountIsNotNumberError] = useState(false)
   const [
@@ -48,12 +47,15 @@ const App = () => {
     setManualLottoNumberHasDuplicationNumberError,
   ] = useState(false)
 
+  const [purchaseAmount, setPurchaseAmount] = useState('')
   const [lottoCount, setLottoCount] = useState(0)
   const [gotALottoCount, setGotALottoCount] = useState(false)
   const [manualLottoCount, setManualLottoCount] = useState('')
   const [manualLottos, setManualLottos] = useState<string[]>([])
   const [myLottos, setMyLottos] = useState<Lotto[]>([])
   const [gotManualLottos, setGotManualLottos] = useState(false)
+  const [winningLottoNumbers, setWinningLottoNumbers] = useState('')
+  const [bonusBall, setBonusBall] = useState('')
 
   const onChangePurchaseAmount = (e: any) => {
     setPurchaseAmount(e.target.value)
@@ -61,6 +63,14 @@ const App = () => {
 
   const onChangeManualLottoCount = (e: any) => {
     setManualLottoCount(e.target.value)
+  }
+
+  const onChangeWinningLottoNumbers = (e: any) => {
+    setWinningLottoNumbers(e.target.value)
+  }
+
+  const onChangeBonusBall = (e: any) => {
+    setBonusBall(e.target.value)
   }
 
   const onSubmitPurchaseAmount = (e: any) => {
@@ -167,6 +177,10 @@ const App = () => {
     console.log([..._myLottos, ...automaticLottos])
   }
 
+  const onSubmitWinningLotto = (e: any) => {
+    e.preventDefault()
+  }
+
   return (
     <div>
       <form onSubmit={onSubmitPurchaseAmount}>
@@ -260,7 +274,28 @@ const App = () => {
               return <div key={i}>[{myLotto.numbers.join(', ')}]</div>
             })}
           </div>
-          <form></form>
+          <form onSubmit={onSubmitWinningLotto}>
+            <div>
+              <label htmlFor="winningLottoInput">지난 주 당첨번호를 입력해주세요.</label>
+              <input
+                style={{ width: '200px' }}
+                id="winningLottoInput"
+                type="text"
+                value={winningLottoNumbers}
+                onChange={onChangeWinningLottoNumbers}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="bonusBallInput">보너스 볼을 입력해주세요.</label>
+              <input
+                id="bonusBallInput"
+                type="text"
+                value={bonusBall}
+                onChange={onChangeBonusBall}
+              ></input>
+            </div>
+            <button type="submit">입력</button>
+          </form>
         </div>
       )}
     </div>
