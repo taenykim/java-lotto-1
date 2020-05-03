@@ -4,11 +4,17 @@ import {
   validateManualLottoCountInput,
   validateManualLottoNumber,
 } from '../modules/formValidator'
+import { Lotto } from '../modules/Lotto'
+import { setLotto } from '../modules/lottoFunctions'
 
 const App = () => {
   const LOTTO_PRICE = 1000
   const LOTTO_COUNT = 6
   const LOTTO_MAX_NUMBER = 45
+  const LOTTO_NUMBERS: number[] = []
+  for (let i = 0; i < LOTTO_MAX_NUMBER; i++) {
+    LOTTO_NUMBERS.push(i + 1)
+  }
 
   const [purchaseAmount, setPurchaseAmount] = useState('')
   const [purchaseAmountIsBlankError, setPurchaseAmountIsBlankError] = useState(false)
@@ -46,6 +52,7 @@ const App = () => {
   const [gotALottoCount, setGotALottoCount] = useState(false)
   const [manualLottoCount, setManualLottoCount] = useState('')
   const [manualLottos, setManualLottos] = useState<string[]>([])
+  const [myLottos, setMyLottos] = useState<Lotto[]>([])
   const [gotManualLottos, setGotManualLottos] = useState(false)
 
   const onChangePurchaseAmount = (e: any) => {
@@ -120,7 +127,8 @@ const App = () => {
       const validatedManualLottoNumber = validateManualLottoNumber(
         manualLottos[i],
         LOTTO_COUNT,
-        LOTTO_MAX_NUMBER
+        LOTTO_MAX_NUMBER,
+        LOTTO_NUMBERS
       )
       if (validatedManualLottoNumber === 'MANUAL_LOTTO_NUMBER_IS_BLANK_ERROR') {
         return setManualLottoNumberIsBlankError(true)
@@ -142,6 +150,21 @@ const App = () => {
       }
     }
     setGotManualLottos(true)
+    const _myLottos: Lotto[] = []
+    for (let i = 0; i < Number(manualLottoCount); i++) {
+      const _manualLotto = manualLottos[i].split(',')
+      const manualLottoNumbers = _manualLotto
+        .map((lottoNumber) => Number(lottoNumber))
+        .sort((a, b) => a - b)
+      _myLottos.push(new Lotto(manualLottoNumbers))
+    }
+    const automaticLottos = setLotto(
+      lottoCount - Number(manualLottoCount),
+      LOTTO_NUMBERS,
+      LOTTO_COUNT
+    )
+    setMyLottos([..._myLottos, ...automaticLottos])
+    console.log([..._myLottos, ...automaticLottos])
   }
 
   return (
@@ -233,8 +256,8 @@ const App = () => {
             구매했습니다.
           </div>
           <div>
-            {manualLottos.map((manualLotto, i) => {
-              return <div key={i}>[{manualLotto.split(',').join(', ')}]</div>
+            {myLottos.map((myLotto, i) => {
+              return <div key={i}>[{myLotto.numbers.join(', ')}]</div>
             })}
           </div>
           <form></form>

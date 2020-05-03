@@ -37,9 +37,9 @@ export const validateManualLottoCountInput = (manualLottoCount: string, lottoCou
 export const validateManualLottoNumber = (
   manualLottoNumber: string,
   LOTTO_COUNT: number,
-  LOTTO_MAX_NUMBER: number
+  LOTTO_MAX_NUMBER: number,
+  LOTTO_NUMBERS: number[]
 ) => {
-  const LOTTO_NUMBERS: number[] = []
   const checkDuplicationLottoNumber: boolean[] = []
   for (let i = 1; i <= LOTTO_MAX_NUMBER; i++) {
     LOTTO_NUMBERS.push(i)
