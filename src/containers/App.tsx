@@ -12,8 +12,16 @@ const App = () => {
     setPurchaseAmountIsUnderMinimumAmountError,
   ] = useState(false)
 
+  const [lottoCount, setLottoCount] = useState(0)
+  const [gotALottoCount, setGotALottoCount] = useState(false)
+  const [manualLottoCount, setManualLottoCount] = useState(0)
+
   const onChangePurchaseAmount = (e: any) => {
     setPurchaseAmount(e.target.value)
+  }
+
+  const onChangeManualLottoCount = (e: any) => {
+    setManualLottoCount(e.target.value)
   }
 
   const onSubmitPurchaseAmount = (e: any) => {
@@ -21,6 +29,7 @@ const App = () => {
     setPurchaseAmountIsBlankError(false)
     setPurchaseAmountIsNotNumberError(false)
     setPurchaseAmountIsUnderMinimumAmountError(false)
+    setGotALottoCount(false)
 
     const validatedPurchaseAmount = validateInput(purchaseAmount, LOTTO_PRICE)
     if (validatedPurchaseAmount === 'PURCHASE_AMOUNT_IS_BLANK_ERROR') {
@@ -34,8 +43,15 @@ const App = () => {
     }
     const _purchaseAmount = Number(validatedPurchaseAmount)
     const lottoCount = Math.floor(_purchaseAmount / LOTTO_PRICE)
-    console.log(lottoCount)
+    setLottoCount(lottoCount)
+    setGotALottoCount(true)
   }
+
+  const onSubmitManualLottoCount = (e: any) => {
+    e.preventDefault()
+    console.log(manualLottoCount)
+  }
+
   return (
     <div>
       <form onSubmit={onSubmitPurchaseAmount}>
@@ -56,6 +72,18 @@ const App = () => {
       )}
       {purchaseAmountIsUnderMinimumAmountError && (
         <div style={{ color: 'red' }}>로또 최소 구입 가격은 {LOTTO_PRICE}원입니다.</div>
+      )}
+      {gotALottoCount && (
+        <form onSubmit={onSubmitManualLottoCount}>
+          <label htmlFor="manualLottoCountInput">수동으로 구매할 로또 수를 입력해주세요. </label>
+          <input
+            id="manualLottoCountInput"
+            type="text"
+            value={manualLottoCount}
+            onChange={onChangeManualLottoCount}
+          ></input>
+          <button type="submit">입력</button>
+        </form>
       )}
     </div>
   )
