@@ -26,36 +26,42 @@ describe('WinningLotto객체 match메소드', () => {
     // when
     const myLotto = new Lotto([1, 2, 3, 4, 5, 6])
     const result = winningLotto.match(myLotto)
+    // then
     expect(result).toStrictEqual('FIRST')
   })
   it('WinningLotto객체에 5개의 숫자, 1개의 보너스볼이 맞을 경우, 2등을 리턴하는지 확인', () => {
     // when
     const myLotto = new Lotto([1, 2, 3, 4, 5, 7])
     const result = winningLotto.match(myLotto)
+    // then
     expect(result).toStrictEqual('SECOND')
   })
   it('WinningLotto객체에 5개의 숫자만 맞을 경우, 3등을 리턴하는지 확인', () => {
     // when
     const myLotto = new Lotto([1, 2, 3, 4, 5, 8])
     const result = winningLotto.match(myLotto)
+    // then
     expect(result).toStrictEqual('THIRD')
   })
   it('WinningLotto객체에 4개의 숫자만 맞을 경우, 4등을 리턴하는지 확인', () => {
     // when
     const myLotto = new Lotto([1, 2, 3, 4, 8, 9])
     const result = winningLotto.match(myLotto)
+    // then
     expect(result).toStrictEqual('FOURTH')
   })
   it('WinningLotto객체에 3개의 숫자만 맞을 경우, 5등을 리턴하는지 확인', () => {
     // when
     const myLotto = new Lotto([1, 2, 3, 8, 9, 10])
     const result = winningLotto.match(myLotto)
+    // then
     expect(result).toStrictEqual('FIFTH')
   })
   it('WinningLotto객체에 맞는 숫자가 3개도 없을 경우 MISS를 리턴하는지 확인', () => {
     // when
     const myLotto = new Lotto([8, 9, 10, 11, 12, 13])
     const result = winningLotto.match(myLotto)
+    // then
     expect(result).toStrictEqual('MISS')
   })
 })
