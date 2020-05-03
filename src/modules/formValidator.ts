@@ -37,21 +37,20 @@ export const validateManualLottoCountInput = (manualLottoCount: string, lottoCou
 export const validateManualLottoNumber = (
   manualLottoNumber: string,
   LOTTO_COUNT: number,
-  LOTTO_MAX_NUMBER: number,
   LOTTO_NUMBERS: number[]
 ) => {
   const checkDuplicationLottoNumber: boolean[] = []
-  for (let i = 1; i <= LOTTO_MAX_NUMBER; i++) {
-    LOTTO_NUMBERS.push(i)
+  for (let i = 1; i <= LOTTO_NUMBERS[LOTTO_NUMBERS.length - 1]; i++) {
     checkDuplicationLottoNumber.push(false)
+  }
+
+  if (manualLottoNumber === '') {
+    return 'LOTTO_NUMBER_IS_BLANK_ERROR'
   }
 
   let _manualLottoNumber = manualLottoNumber.split(',')
   _manualLottoNumber = _manualLottoNumber.map((lottoNumber) => lottoNumber.trim())
 
-  if (_manualLottoNumber.length === 0) {
-    return 'LOTTO_NUMBER_IS_BLANK_ERROR'
-  }
   if (_manualLottoNumber.length > LOTTO_COUNT) {
     return 'LOTTO_NUMBER_IS_GREATER_THAN_LOTTO_COUNT'
   }
@@ -82,11 +81,10 @@ export const validateManualLottoNumber = (
 export const validateWinningLottoNumber = (
   manualLottoNumber: string,
   LOTTO_COUNT: number,
-  LOTTO_MAX_NUMBER: number,
   LOTTO_NUMBERS: number[]
 ) => {
   const checkDuplicationLottoNumber: boolean[] = []
-  for (let i = 1; i <= LOTTO_MAX_NUMBER; i++) {
+  for (let i = 1; i <= LOTTO_NUMBERS[LOTTO_NUMBERS.length - 1]; i++) {
     LOTTO_NUMBERS.push(i)
     checkDuplicationLottoNumber.push(false)
   }

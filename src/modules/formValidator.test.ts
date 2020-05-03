@@ -77,3 +77,76 @@ describe('수동 로또 개수 유효성 검사', () => {
     expect(result).toStrictEqual('1')
   })
 })
+
+describe('수동 로또 숫자입력 유효성 검사', () => {
+  const LOTTO_NUMBERS: number[] = []
+  const LOTTO_MAX_NUMBER = 45
+  for (let i = 0; i < LOTTO_MAX_NUMBER; i++) {
+    LOTTO_NUMBERS.push(i + 1)
+  }
+  const LOTTO_COUNT = 6
+  it('입력값이 없는 경우, 잘 걸러내는 지 확인', () => {
+    // given
+    const manualLottoNumber = ''
+    // when
+    const result = validateManualLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
+    // then
+    expect(result).toStrictEqual('LOTTO_NUMBER_IS_BLANK_ERROR')
+  })
+  it('입력값이 로또 카운트보다 클 경우, 잘 걸러내는 지 확인', () => {
+    // given
+    const manualLottoNumber = '1,2,3,4,5,6,7'
+    // when
+    const result = validateManualLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
+    // then
+    expect(result).toStrictEqual('LOTTO_NUMBER_IS_GREATER_THAN_LOTTO_COUNT')
+  })
+  it('입력값이 로또 카운트보다 작을 경우, 잘 걸러내는 지 확인', () => {
+    // given
+    const manualLottoNumber = '1,2,3,4,5'
+    // when
+    const result = validateManualLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
+    // then
+    expect(result).toStrictEqual('LOTTO_NUMBER_IS_LESS_THAN_LOTTO_COUNT')
+  })
+  it('입력값을 배열로 잘랐을 때, 빈칸이 있을 경우, 잘 걸러내는 지 확인', () => {
+    // given
+    const manualLottoNumber = '1,2,3,4,,6'
+    // when
+    const result = validateManualLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
+    // then
+    expect(result).toStrictEqual('LOTTO_NUMBER_IS_BLANK_ERROR')
+  })
+  it('입력값을 배열로 잘랐을 때, 숫자가 아닌 것이 있을 경우, 잘 걸러내는 지 확인', () => {
+    // given
+    const manualLottoNumber = '1,2,3,4,태은,6'
+    // when
+    const result = validateManualLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
+    // then
+    expect(result).toStrictEqual('LOTTO_NUMBER_IS_NOT_NUMBER_ERROR')
+  })
+  it('입력값을 배열로 잘랐을 때, 로또 범위를 벗어난 것이 있을 경우, 잘 걸러내는 지 확인', () => {
+    // given
+    const manualLottoNumber = '1,2,3,4,5000,6'
+    // when
+    const result = validateManualLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
+    // then
+    expect(result).toStrictEqual('LOTTO_NUMBER_IS_NOT_BE_IN_LOTTO_SCOPE_ERROR')
+  })
+  it('입력값을 배열로 잘랐을 때, 중복된 것이 있을 경우, 잘 걸러내는 지 확인', () => {
+    // given
+    const manualLottoNumber = '1,2,3,4,6,6'
+    // when
+    const result = validateManualLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
+    // then
+    expect(result).toStrictEqual('LOTTO_NUMBER_HAS_DUPLICATION_NUMBER_ERROR')
+  })
+  it('에러가 없을 시, 정확한 값을 잘 리턴하는 지 확인', () => {
+    // given
+    const manualLottoNumber = '1,2,3,4,5,6'
+    // when
+    const result = validateManualLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
+    // then
+    expect(result).toStrictEqual(['1', '2', '3', '4', '5', '6'])
+  })
+})

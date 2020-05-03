@@ -176,7 +176,6 @@ const App = () => {
       const validatedManualLottoNumber = validateManualLottoNumber(
         manualLottos[i],
         LOTTO_COUNT,
-        LOTTO_MAX_NUMBER,
         LOTTO_NUMBERS
       )
       if (validatedManualLottoNumber === 'LOTTO_NUMBER_IS_BLANK_ERROR') {
@@ -229,7 +228,6 @@ const App = () => {
     const validatedWinningLottoNumber = validateWinningLottoNumber(
       winningLottoNumbers,
       LOTTO_COUNT,
-      LOTTO_MAX_NUMBER,
       LOTTO_NUMBERS
     )
     if (validatedWinningLottoNumber === 'LOTTO_NUMBER_IS_BLANK_ERROR') {
