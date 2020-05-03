@@ -6,6 +6,7 @@ import {
 } from '../modules/formValidator'
 import { Lotto } from '../modules/Lotto'
 import { setLotto } from '../modules/lottoFunctions'
+import { WinningLotto } from '../modules/WinningLotto'
 
 const App = () => {
   const LOTTO_PRICE = 1000
@@ -14,6 +15,14 @@ const App = () => {
   const LOTTO_NUMBERS: number[] = []
   for (let i = 0; i < LOTTO_MAX_NUMBER; i++) {
     LOTTO_NUMBERS.push(i + 1)
+  }
+  const RANKS = {
+    FIRST: 0,
+    SECOND: 0,
+    THIRD: 0,
+    FOURTH: 0,
+    FIFTH: 0,
+    MISS: 0,
   }
 
   const [purchaseAmountIsBlankError, setPurchaseAmountIsBlankError] = useState(false)
@@ -56,6 +65,8 @@ const App = () => {
   const [gotManualLottos, setGotManualLottos] = useState(false)
   const [winningLottoNumbers, setWinningLottoNumbers] = useState('')
   const [bonusBall, setBonusBall] = useState('')
+  const [ranks, setRanks] = useState(RANKS)
+  const [gotResult, setGotResult] = useState(false)
 
   const onChangePurchaseAmount = (e: any) => {
     setPurchaseAmount(e.target.value)
@@ -179,6 +190,17 @@ const App = () => {
 
   const onSubmitWinningLotto = (e: any) => {
     e.preventDefault()
+
+    const winningLotto = new WinningLotto(
+      new Lotto(winningLottoNumbers.split(',').map((item) => Number(item))),
+      Number(bonusBall)
+    )
+    for (let i = 0; i < myLottos.length; i++) {
+      RANKS[winningLotto.match(myLottos[i])]++
+    }
+    setRanks(RANKS)
+    setGotResult(true)
+    console.log(RANKS)
   }
 
   return (
@@ -296,6 +318,29 @@ const App = () => {
             </div>
             <button type="submit">입력</button>
           </form>
+        </div>
+      )}
+      {gotResult && (
+        <div>
+          <div style={{ marginTop: '20px' }}>당첨 통계</div>
+          <div>--------</div>
+          <div>3개 일치 (5000원) - {ranks.FIFTH}</div>
+          <div>4개 일치 (50000원) - {ranks.FOURTH}</div>
+          <div>5개 일치 (1500000원) - {ranks.THIRD}</div>
+          <div>5개 일치, 보너스볼 일치 (30000000원) - {ranks.SECOND}</div>
+          <div>6개 일치 (2000000000원) - {ranks.FIRST}</div>
+          <div>
+            총 수익률은{' '}
+            {Math.floor(
+              (ranks.FIFTH * 5000 +
+                ranks.FOURTH * 50000 +
+                ranks.THIRD * 1500000 +
+                ranks.SECOND * 30000000 +
+                ranks.FIRST * 2000000000) /
+                Number(purchaseAmount)
+            )}
+            % 입니다.
+          </div>
         </div>
       )}
     </div>
