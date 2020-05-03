@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import {
   validatePurchaseAmountInput,
   validateManualLottoCountInput,
-  validateManualLottoNumber,
-  validateWinningLottoNumber,
+  validateLottoNumber,
   validateBonusBallInput,
 } from '../modules/formValidator'
 import { Lotto } from '../modules/Lotto'
@@ -173,7 +172,7 @@ const App = () => {
     setManualLottoNumberIsNotBeInLottoScopeError(false)
 
     for (let i = 0; i < manualLottos.length; i++) {
-      const validatedManualLottoNumber = validateManualLottoNumber(
+      const validatedManualLottoNumber = validateLottoNumber(
         manualLottos[i],
         LOTTO_COUNT,
         LOTTO_NUMBERS
@@ -225,7 +224,7 @@ const App = () => {
     setBonusBallIsNotNumberError(false)
     setBonusBallIsNotBeInLottoSopeError(false)
 
-    const validatedWinningLottoNumber = validateWinningLottoNumber(
+    const validatedWinningLottoNumber = validateLottoNumber(
       winningLottoNumbers,
       LOTTO_COUNT,
       LOTTO_NUMBERS

@@ -1,8 +1,7 @@
 import {
   validatePurchaseAmountInput,
   validateManualLottoCountInput,
-  validateManualLottoNumber,
-  validateWinningLottoNumber,
+  validateLottoNumber,
   validateBonusBallInput,
 } from './formValidator'
 
@@ -78,7 +77,7 @@ describe('수동 로또 개수 유효성 검사', () => {
   })
 })
 
-describe('수동 로또 숫자입력 유효성 검사', () => {
+describe('로또 숫자입력 유효성 검사', () => {
   const LOTTO_NUMBERS: number[] = []
   const LOTTO_MAX_NUMBER = 45
   for (let i = 0; i < LOTTO_MAX_NUMBER; i++) {
@@ -89,7 +88,7 @@ describe('수동 로또 숫자입력 유효성 검사', () => {
     // given
     const manualLottoNumber = ''
     // when
-    const result = validateManualLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
+    const result = validateLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
     // then
     expect(result).toStrictEqual('LOTTO_NUMBER_IS_BLANK_ERROR')
   })
@@ -97,7 +96,7 @@ describe('수동 로또 숫자입력 유효성 검사', () => {
     // given
     const manualLottoNumber = '1,2,3,4,5,6,7'
     // when
-    const result = validateManualLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
+    const result = validateLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
     // then
     expect(result).toStrictEqual('LOTTO_NUMBER_IS_GREATER_THAN_LOTTO_COUNT')
   })
@@ -105,7 +104,7 @@ describe('수동 로또 숫자입력 유효성 검사', () => {
     // given
     const manualLottoNumber = '1,2,3,4,5'
     // when
-    const result = validateManualLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
+    const result = validateLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
     // then
     expect(result).toStrictEqual('LOTTO_NUMBER_IS_LESS_THAN_LOTTO_COUNT')
   })
@@ -113,7 +112,7 @@ describe('수동 로또 숫자입력 유효성 검사', () => {
     // given
     const manualLottoNumber = '1,2,3,4,,6'
     // when
-    const result = validateManualLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
+    const result = validateLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
     // then
     expect(result).toStrictEqual('LOTTO_NUMBER_IS_BLANK_ERROR')
   })
@@ -121,7 +120,7 @@ describe('수동 로또 숫자입력 유효성 검사', () => {
     // given
     const manualLottoNumber = '1,2,3,4,태은,6'
     // when
-    const result = validateManualLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
+    const result = validateLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
     // then
     expect(result).toStrictEqual('LOTTO_NUMBER_IS_NOT_NUMBER_ERROR')
   })
@@ -129,7 +128,7 @@ describe('수동 로또 숫자입력 유효성 검사', () => {
     // given
     const manualLottoNumber = '1,2,3,4,5000,6'
     // when
-    const result = validateManualLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
+    const result = validateLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
     // then
     expect(result).toStrictEqual('LOTTO_NUMBER_IS_NOT_BE_IN_LOTTO_SCOPE_ERROR')
   })
@@ -137,7 +136,7 @@ describe('수동 로또 숫자입력 유효성 검사', () => {
     // given
     const manualLottoNumber = '1,2,3,4,6,6'
     // when
-    const result = validateManualLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
+    const result = validateLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
     // then
     expect(result).toStrictEqual('LOTTO_NUMBER_HAS_DUPLICATION_NUMBER_ERROR')
   })
@@ -145,7 +144,7 @@ describe('수동 로또 숫자입력 유효성 검사', () => {
     // given
     const manualLottoNumber = '1,2,3,4,5,6'
     // when
-    const result = validateManualLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
+    const result = validateLottoNumber(manualLottoNumber, LOTTO_COUNT, LOTTO_NUMBERS)
     // then
     expect(result).toStrictEqual(['1', '2', '3', '4', '5', '6'])
   })
