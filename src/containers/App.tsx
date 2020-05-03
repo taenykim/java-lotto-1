@@ -212,7 +212,6 @@ const App = () => {
       LOTTO_COUNT
     )
     setMyLottos([..._myLottos, ...automaticLottos])
-    console.log([..._myLottos, ...automaticLottos])
   }
 
   const onSubmitWinningLotto = (e: any) => {
@@ -279,7 +278,6 @@ const App = () => {
     }
     setRanks(RANKS)
     setGotResult(true)
-    console.log(RANKS)
   }
 
   return (
