@@ -149,3 +149,52 @@ describe('로또 숫자입력 유효성 검사', () => {
     expect(result).toStrictEqual(['1', '2', '3', '4', '5', '6'])
   })
 })
+
+describe('보너스볼 유효성 검사', () => {
+  const LOTTO_NUMBERS: number[] = []
+  const LOTTO_MAX_NUMBER = 45
+  for (let i = 0; i < LOTTO_MAX_NUMBER; i++) {
+    LOTTO_NUMBERS.push(i + 1)
+  }
+  const validatedWinningLottoNumber = ['1', '2', '3', '4', '5', '6']
+  it('입력값이 없는 경우, 잘 걸러내는 지 확인', () => {
+    // given
+    const bonusBall = ''
+    // when
+    const result = validateBonusBallInput(validatedWinningLottoNumber, bonusBall, LOTTO_NUMBERS)
+    // then
+    expect(result).toStrictEqual('BONUS_BALL_IS_BLANK_ERROR')
+  })
+  it('보너스볼이 숫자가 아닐 경우, 잘 걸러내는 지 확인', () => {
+    // given
+    const bonusBall = '태은'
+    // when
+    const result = validateBonusBallInput(validatedWinningLottoNumber, bonusBall, LOTTO_NUMBERS)
+    // then
+    expect(result).toStrictEqual('BONUS_BALL_IS_NOT_NUMBER_ERROR')
+  })
+  it('보너스볼이 로또 범위 밖의 숫자일 경우, 잘 걸러내는 지 확인', () => {
+    // given
+    const bonusBall = '5000'
+    // when
+    const result = validateBonusBallInput(validatedWinningLottoNumber, bonusBall, LOTTO_NUMBERS)
+    // then
+    expect(result).toStrictEqual('BONUS_BALL_IS_NOT_BE_IN_LOTTO_SCOPE_ERROR')
+  })
+  it('보너스볼이 위닝 로또 번호와 겹칠 경우, 잘 걸러내는 지 확인', () => {
+    // given
+    const bonusBall = '3'
+    // when
+    const result = validateBonusBallInput(validatedWinningLottoNumber, bonusBall, LOTTO_NUMBERS)
+    // then
+    expect(result).toStrictEqual('WINNING_LOTTO_NUMBER_HAS_BONUS_BALL_ERROR')
+  })
+  it('에러가 없을 경우, 정확한 값을 리턴하는 지 확인', () => {
+    // given
+    const bonusBall = '7'
+    // when
+    const result = validateBonusBallInput(validatedWinningLottoNumber, bonusBall, LOTTO_NUMBERS)
+    // then
+    expect(result).toStrictEqual('7')
+  })
+})
