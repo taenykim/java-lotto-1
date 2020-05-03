@@ -10,7 +10,7 @@ export const setLotto = (lottoCount: number, LOTTO_NUMBERS: number[], LOTTO_COUN
   return lottos
 }
 
-const setRandomNumbers = (LOTTO_NUMBERS: number[], LOTTO_COUNT: number) => {
+export const setRandomNumbers = (LOTTO_NUMBERS: number[], LOTTO_COUNT: number) => {
   let takenLottoNumbers = [...LOTTO_NUMBERS]
   const resultNumbers = []
   for (let j = 0; j < LOTTO_COUNT; j++) {

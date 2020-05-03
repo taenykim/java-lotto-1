@@ -1,0 +1,1 @@
+import { Lotto } from './Lotto'

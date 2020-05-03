@@ -202,10 +202,9 @@ const App = () => {
     const _myLottos: Lotto[] = []
     for (let i = 0; i < Number(manualLottoCount); i++) {
       const _manualLotto = manualLottos[i].split(',')
-      const manualLottoNumbers = _manualLotto
-        .map((lottoNumber) => Number(lottoNumber))
-        .sort((a, b) => a - b)
-      _myLottos.push(new Lotto(manualLottoNumbers))
+      const manualLottoNumbers = _manualLotto.map((lottoNumber) => Number(lottoNumber))
+      const sortedManualLottoNumbers = manualLottoNumbers.sort((a, b) => a - b)
+      _myLottos.push(new Lotto(sortedManualLottoNumbers))
     }
     const automaticLottos = setLotto(
       lottoCount - Number(manualLottoCount),
