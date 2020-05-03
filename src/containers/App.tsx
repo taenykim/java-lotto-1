@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
-import { validateInput } from '../modules/formValidator'
+import {
+  validatePurchaseAmountInput,
+  validateManualLottoCountInput,
+} from '../modules/formValidator'
 
 const App = () => {
   const LOTTO_PRICE = 1000
@@ -11,10 +14,16 @@ const App = () => {
     purchaseAmountIsUnderMinimumAmountError,
     setPurchaseAmountIsUnderMinimumAmountError,
   ] = useState(false)
+  const [manualLottoCountIsBlankError, setManualLottoCountIsBlankError] = useState(false)
+  const [manualLottoCountIsNotNumberError, setManualLottoCountIsNotNumberError] = useState(false)
+  const [
+    manualLottoCountIsBiggerThanLottoCountError,
+    setManualLottoCountIsBiggerThanLottoCountError,
+  ] = useState(false)
 
   const [lottoCount, setLottoCount] = useState(0)
   const [gotALottoCount, setGotALottoCount] = useState(false)
-  const [manualLottoCount, setManualLottoCount] = useState(0)
+  const [manualLottoCount, setManualLottoCount] = useState('')
 
   const onChangePurchaseAmount = (e: any) => {
     setPurchaseAmount(e.target.value)
@@ -31,7 +40,7 @@ const App = () => {
     setPurchaseAmountIsUnderMinimumAmountError(false)
     setGotALottoCount(false)
 
-    const validatedPurchaseAmount = validateInput(purchaseAmount, LOTTO_PRICE)
+    const validatedPurchaseAmount = validatePurchaseAmountInput(purchaseAmount, LOTTO_PRICE)
     if (validatedPurchaseAmount === 'PURCHASE_AMOUNT_IS_BLANK_ERROR') {
       return setPurchaseAmountIsBlankError(true)
     }
@@ -49,7 +58,20 @@ const App = () => {
 
   const onSubmitManualLottoCount = (e: any) => {
     e.preventDefault()
-    console.log(manualLottoCount)
+    setManualLottoCountIsBlankError(false)
+    setManualLottoCountIsNotNumberError(false)
+    setManualLottoCountIsBiggerThanLottoCountError(false)
+
+    const validatedManualLottoCount = validateManualLottoCountInput(manualLottoCount, lottoCount)
+    if (validatedManualLottoCount === 'MANUAL_LOTTO_COUNT_IS_BLANK_ERROR') {
+      return setManualLottoCountIsBlankError(true)
+    }
+    if (validatedManualLottoCount === 'MANUAL_LOTTO_COUNT_IS_NOT_NUMBER_ERROR') {
+      return setManualLottoCountIsNotNumberError(true)
+    }
+    if (validatedManualLottoCount === 'MAMUAL_LOTTO_COUNT_IS_BIGGER_THAN_LOTTO_COUNT_ERROR') {
+      return setManualLottoCountIsBiggerThanLottoCountError(true)
+    }
   }
 
   return (
@@ -84,6 +106,15 @@ const App = () => {
           ></input>
           <button type="submit">입력</button>
         </form>
+      )}
+      {manualLottoCountIsBlankError && (
+        <div style={{ color: 'red' }}>수동으로 구매할 로또 수를 입력하지 않았습니다.</div>
+      )}
+      {manualLottoCountIsNotNumberError && (
+        <div style={{ color: 'red' }}>수동으로 구매할 로또 수는 숫자로 입력해주세요.</div>
+      )}
+      {manualLottoCountIsBiggerThanLottoCountError && (
+        <div style={{ color: 'red' }}>{lottoCount}개보다 작게 입력해주세요.</div>
       )}
     </div>
   )
