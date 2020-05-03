@@ -46,6 +46,7 @@ const App = () => {
   const [gotALottoCount, setGotALottoCount] = useState(false)
   const [manualLottoCount, setManualLottoCount] = useState('')
   const [manualLottos, setManualLottos] = useState<string[]>([])
+  const [gotManualLottos, setGotManualLottos] = useState(false)
 
   const onChangePurchaseAmount = (e: any) => {
     setPurchaseAmount(e.target.value)
@@ -140,6 +141,7 @@ const App = () => {
         return setManualLottoNumberHasDuplicationNumberError(true)
       }
     }
+    setGotManualLottos(true)
   }
 
   return (
@@ -223,6 +225,20 @@ const App = () => {
       )}
       {manualLottoNumberHasDuplicationNumberError && (
         <div style={{ color: 'red' }}>중복된 로또 번호가 있습니다.</div>
+      )}
+      {gotManualLottos && (
+        <div>
+          <div>
+            수동으로 {manualLottoCount}장, 자동으로 {lottoCount - Number(manualLottoCount)}개를
+            구매했습니다.
+          </div>
+          <div>
+            {manualLottos.map((manualLotto, i) => {
+              return <div key={i}>[{manualLotto.split(',').join(', ')}]</div>
+            })}
+          </div>
+          <form></form>
+        </div>
       )}
     </div>
   )
