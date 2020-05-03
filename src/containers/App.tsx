@@ -80,6 +80,12 @@ const App = () => {
     setManualLottos(_manualLottos)
   }
 
+  const onChangeManualLottoNumber = (e: any) => {
+    const manualLottoIndex = Number(e.target.id.substr(17))
+    manualLottos[manualLottoIndex] = e.target.value
+    setManualLottos(manualLottos)
+  }
+
   return (
     <div>
       <form onSubmit={onSubmitPurchaseAmount}>
@@ -130,7 +136,12 @@ const App = () => {
                 <label htmlFor={'manualLottoNumber' + i}>
                   수동으로 구매할 번호를 입력해주세요.
                 </label>
-                <input style={{ width: '200px' }} id={'manualLottoNumber' + i} type="text"></input>
+                <input
+                  style={{ width: '200px' }}
+                  id={'manualLottoNumber' + i}
+                  type="text"
+                  onChange={onChangeManualLottoNumber}
+                ></input>
               </div>
             )
           })}
