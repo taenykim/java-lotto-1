@@ -24,6 +24,7 @@ const App = () => {
   const [lottoCount, setLottoCount] = useState(0)
   const [gotALottoCount, setGotALottoCount] = useState(false)
   const [manualLottoCount, setManualLottoCount] = useState('')
+  const [manualLottos, setManualLottos] = useState<string[]>([])
 
   const onChangePurchaseAmount = (e: any) => {
     setPurchaseAmount(e.target.value)
@@ -72,6 +73,11 @@ const App = () => {
     if (validatedManualLottoCount === 'MAMUAL_LOTTO_COUNT_IS_BIGGER_THAN_LOTTO_COUNT_ERROR') {
       return setManualLottoCountIsBiggerThanLottoCountError(true)
     }
+    const _manualLottos = []
+    for (let i = 0; i < Number(manualLottoCount); i++) {
+      _manualLottos.push('')
+    }
+    setManualLottos(_manualLottos)
   }
 
   return (
@@ -115,6 +121,21 @@ const App = () => {
       )}
       {manualLottoCountIsBiggerThanLottoCountError && (
         <div style={{ color: 'red' }}>{lottoCount}개보다 작게 입력해주세요.</div>
+      )}
+      {manualLottos.length > 0 && (
+        <form>
+          {manualLottos.map((manualLotto, i) => {
+            return (
+              <div key={i}>
+                <label htmlFor={'manualLottoNumber' + i}>
+                  수동으로 구매할 번호를 입력해주세요.
+                </label>
+                <input style={{ width: '200px' }} id={'manualLottoNumber' + i} type="text"></input>
+              </div>
+            )
+          })}
+          <button type="submit">입력</button>
+        </form>
       )}
     </div>
   )
