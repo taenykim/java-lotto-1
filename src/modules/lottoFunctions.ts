@@ -12,7 +12,7 @@ export const setLotto = (lottoCount: number, LOTTO_NUMBERS: number[], LOTTO_COUN
 
 export const setRandomNumbers = (LOTTO_NUMBERS: number[], LOTTO_COUNT: number) => {
   let takenLottoNumbers = [...LOTTO_NUMBERS]
-  const resultNumbers = []
+  const resultNumbers: number[] = []
   for (let j = 0; j < LOTTO_COUNT; j++) {
     const randomNumber = Math.floor(Math.random() * (LOTTO_NUMBERS[LOTTO_NUMBERS.length - 1] - j))
     const chosen = takenLottoNumbers.splice(randomNumber, 1)[0]
