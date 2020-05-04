@@ -155,6 +155,15 @@ const App = () => {
       _manualLottos.push('')
     }
     setManualLottos(_manualLottos)
+    if (validatedManualLottoCount === '0') {
+      setAllAutomaticLotto(lottoCount)
+    }
+  }
+
+  const setAllAutomaticLotto = (lottoCount: number) => {
+    const automaticLottos = setLotto(lottoCount, LOTTO_NUMBERS, LOTTO_COUNT)
+    setMyLottos([...automaticLottos])
+    setGotManualLottos(true)
   }
 
   const onChangeManualLottoNumber = (e: any) => {
