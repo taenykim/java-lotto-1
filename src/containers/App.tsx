@@ -398,10 +398,10 @@ const App = () => {
         <div style={{ color: 'red' }}>입력하지 않은 번호가 있습니다.</div>
       )}
       {winningLottoNumberIsGreaterThanLottoCountError && (
-        <div style={{ color: 'red' }}>당첨 번호는 {LOTTO_COUNT - 1}개로 입력해주세요.</div>
+        <div style={{ color: 'red' }}>당첨 번호는 {LOTTO_COUNT}개로 입력해주세요.</div>
       )}
       {winningLottoNumberIsLessThanLottoCountError && (
-        <div style={{ color: 'red' }}>당첨 번호는 {LOTTO_COUNT - 1}개로 입력해주세요.</div>
+        <div style={{ color: 'red' }}>당첨 번호는 {LOTTO_COUNT}개로 입력해주세요.</div>
       )}
       {winningLottoNumberIsNotNumberError && (
         <div style={{ color: 'red' }}>당첨 번호는 숫자와 ,로 입력해주세요.</div>
