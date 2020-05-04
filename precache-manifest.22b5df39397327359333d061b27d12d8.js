@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c7bebee37b663076c76b949c8da841d7",
+    "revision": "05c8f641790ffe4012c4f66d006fcaca",
     "url": "/java-lotto-1/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/java-lotto-1/static/js/2.4e30827e.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "18b6402cedcdf9accdbd",
-    "url": "/java-lotto-1/static/js/main.79055ea0.chunk.js"
+    "revision": "716636af4996e57f8ddd",
+    "url": "/java-lotto-1/static/js/main.a764fcb2.chunk.js"
   },
   {
     "revision": "4a69b95d75f5b0125d8a",
