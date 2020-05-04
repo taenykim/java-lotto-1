@@ -189,6 +189,14 @@ describe('보너스볼 유효성 검사', () => {
     // then
     expect(result).toStrictEqual('WINNING_LOTTO_NUMBER_HAS_BONUS_BALL_ERROR')
   })
+  it('보너스볼이 위닝 로또 번호와 겹칠 경우, 잘 걸러내는 지 확인', () => {
+    // given
+    const bonusBall = '1'
+    // when
+    const result = validateBonusBallInput(validatedWinningLottoNumber, bonusBall, LOTTO_NUMBERS)
+    // then
+    expect(result).toStrictEqual('WINNING_LOTTO_NUMBER_HAS_BONUS_BALL_ERROR')
+  })
   it('에러가 없을 경우, 정확한 값을 리턴하는 지 확인', () => {
     // given
     const bonusBall = '7'

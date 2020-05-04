@@ -95,7 +95,7 @@ export const validateBonusBallInput = (
   if (LOTTO_NUMBERS.indexOf(_bonusBall) < 0) {
     return 'BONUS_BALL_IS_NOT_BE_IN_LOTTO_SCOPE_ERROR'
   }
-  if (validatedWinningLottoNumber.indexOf(bonusBall) > 0) {
+  if (validatedWinningLottoNumber.indexOf(bonusBall) >= 0) {
     return 'WINNING_LOTTO_NUMBER_HAS_BONUS_BALL_ERROR'
   }
 
