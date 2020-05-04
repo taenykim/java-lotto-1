@@ -89,7 +89,7 @@ const App = () => {
   const [manualLottoCount, setManualLottoCount] = useState('')
   const [manualLottos, setManualLottos] = useState<string[]>([])
   const [myLottos, setMyLottos] = useState<Lotto[]>([])
-  const [gotManualLottos, setGotManualLottos] = useState(false)
+  const [gotUserLottos, setGotUserLottos] = useState(false)
   const [winningLottoNumbers, setWinningLottoNumbers] = useState('')
   const [bonusBall, setBonusBall] = useState('')
   const [ranks, setRanks] = useState(RANKS)
@@ -163,7 +163,7 @@ const App = () => {
   const setAllAutomaticLotto = (lottoCount: number) => {
     const automaticLottos = setLotto(lottoCount, LOTTO_NUMBERS, LOTTO_COUNT)
     setMyLottos([...automaticLottos])
-    setGotManualLottos(true)
+    setGotUserLottos(true)
   }
 
   const onChangeManualLottoNumber = (e: any) => {
@@ -205,7 +205,7 @@ const App = () => {
         return setManualLottoNumberHasDuplicationNumberError(true)
       }
     }
-    setGotManualLottos(true)
+    setGotUserLottos(true)
     const _myLottos: Lotto[] = []
     for (let i = 0; i < Number(manualLottoCount); i++) {
       const _manualLotto = manualLottos[i].split(',')
@@ -368,7 +368,7 @@ const App = () => {
       {manualLottoNumberHasDuplicationNumberError && (
         <div style={{ color: 'red' }}>중복된 로또 번호가 있습니다.</div>
       )}
-      {gotManualLottos && (
+      {gotUserLottos && (
         <div>
           <div>
             수동으로 {manualLottoCount}장, 자동으로 {lottoCount - Number(manualLottoCount)}개를
