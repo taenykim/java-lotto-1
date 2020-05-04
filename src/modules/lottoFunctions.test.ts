@@ -1,4 +1,4 @@
-import { setLotto, setRandomNumbers } from './lottoFunctions'
+import { makeAutomaticLotto, setRandomNumbers } from './lottoFunctions'
 import { Lotto } from './Lotto'
 
 describe('랜덤넘버 생성기', () => {
@@ -28,7 +28,7 @@ describe('자동 로또 생성기', () => {
     // given
     const lottoCount = 3
     // when
-    const result = setLotto(lottoCount, LOTTO_NUMBERS, LOTTO_COUNT)
+    const result = makeAutomaticLotto(lottoCount, LOTTO_NUMBERS, LOTTO_COUNT)
     // then
     expect(result.length).toStrictEqual(3)
   })
@@ -36,7 +36,7 @@ describe('자동 로또 생성기', () => {
     // given
     const lottoCount = 3
     // when
-    const result = setLotto(lottoCount, LOTTO_NUMBERS, LOTTO_COUNT)
+    const result = makeAutomaticLotto(lottoCount, LOTTO_NUMBERS, LOTTO_COUNT)
     // then
     expect(result[0] instanceof Lotto).toStrictEqual(true)
   })

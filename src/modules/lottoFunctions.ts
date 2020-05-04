@@ -1,6 +1,10 @@
 import { Lotto } from './Lotto'
 
-export const setLotto = (lottoCount: number, LOTTO_NUMBERS: number[], LOTTO_COUNT: number) => {
+export const makeAutomaticLotto = (
+  lottoCount: number,
+  LOTTO_NUMBERS: number[],
+  LOTTO_COUNT: number
+) => {
   const lottos: Lotto[] = []
   for (let i = 0; i < lottoCount; i++) {
     lottos.push(

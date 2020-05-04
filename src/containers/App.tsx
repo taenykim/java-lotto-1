@@ -6,7 +6,7 @@ import {
   validateBonusBallInput,
 } from '../modules/formValidator'
 import { Lotto } from '../modules/Lotto'
-import { setLotto } from '../modules/lottoFunctions'
+import { makeAutomaticLotto } from '../modules/lottoFunctions'
 import { WinningLotto } from '../modules/WinningLotto'
 
 const App = () => {
@@ -161,7 +161,7 @@ const App = () => {
   }
 
   const setAllAutomaticLotto = (lottoCount: number) => {
-    const automaticLottos = setLotto(lottoCount, LOTTO_NUMBERS, LOTTO_COUNT)
+    const automaticLottos = makeAutomaticLotto(lottoCount, LOTTO_NUMBERS, LOTTO_COUNT)
     setMyLottos([...automaticLottos])
     setGotUserLottos(true)
   }
@@ -213,7 +213,7 @@ const App = () => {
       const sortedManualLottoNumbers = manualLottoNumbers.sort((a, b) => a - b)
       _myLottos.push(new Lotto(sortedManualLottoNumbers))
     }
-    const automaticLottos = setLotto(
+    const automaticLottos = makeAutomaticLotto(
       lottoCount - Number(manualLottoCount),
       LOTTO_NUMBERS,
       LOTTO_COUNT
