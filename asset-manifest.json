@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/java-lotto-1/static/js/main.79055ea0.chunk.js",
+    "main.js.map": "/java-lotto-1/static/js/main.79055ea0.chunk.js.map",
+    "runtime-main.js": "/java-lotto-1/static/js/runtime-main.17cfd98a.js",
+    "runtime-main.js.map": "/java-lotto-1/static/js/runtime-main.17cfd98a.js.map",
+    "static/js/2.4e30827e.chunk.js": "/java-lotto-1/static/js/2.4e30827e.chunk.js",
+    "static/js/2.4e30827e.chunk.js.map": "/java-lotto-1/static/js/2.4e30827e.chunk.js.map",
+    "index.html": "/java-lotto-1/index.html",
+    "precache-manifest.7310fc6f0c0a2341f5b69ae84a926565.js": "/java-lotto-1/precache-manifest.7310fc6f0c0a2341f5b69ae84a926565.js",
+    "service-worker.js": "/java-lotto-1/service-worker.js",
+    "static/js/2.4e30827e.chunk.js.LICENSE.txt": "/java-lotto-1/static/js/2.4e30827e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.17cfd98a.js",
+    "static/js/2.4e30827e.chunk.js",
+    "static/js/main.79055ea0.chunk.js"
+  ]
+}
